@@ -16,8 +16,8 @@ test("should add a player and clear the input", async () => {
   expect(wrapper.findAll(".player-name").at(0)?.text()).toBe("A");
   expect(wrapper.find(".player-points").text()).toBe("0");
 
-  expect(wrapper.find(".start-climbing").attributes("disabled")).toBe("");
-  expect(wrapper.find(".round").text()).toBe("Rodada: 1 / 3");
+  expect(wrapper.find(".start-round").attributes("disabled")).toBe("");
+  expect(wrapper.find(".rounds").text()).toBe("Rodadas: 0 / 3");
   expect(wrapper.find(".distribuition-cards").text()).toBe(
     "Distribuir 6 cartas"
   );
@@ -40,9 +40,7 @@ test("should enable to click start climbing button if at least two players was r
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
 
-  expect(
-    wrapper.find(".start-climbing").attributes("disabeld")
-  ).toBeUndefined();
+  expect(wrapper.find(".start-round").attributes("disabeld")).toBeUndefined();
 });
 
 test("should inform that need to distribute 5 cards if 6 players was registered", async () => {
@@ -71,7 +69,7 @@ test("should not be able to register more than 6 players", async () => {
   expect(wrapper.find(".add-player").attributes("disabled")).toBe("");
 });
 
-test("should show the climbing info when click start climbing button", async () => {
+test("should show the climbing info when click start round button", async () => {
   const wrapper = mount(App, {});
 
   await wrapper.find(".input-player").setValue("A");
@@ -79,7 +77,7 @@ test("should show the climbing info when click start climbing button", async () 
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
 
   expect(wrapper.find(".climbing-info").isVisible()).toBe(true);
   expect(wrapper.find(".round-info").isVisible()).toBe(false);
@@ -93,7 +91,7 @@ test("should show the climbing table", async () => {
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
 
   const input = wrapper.findAll(".player-climb-cards__input").at(0)
     ?.element as HTMLInputElement;
@@ -114,7 +112,7 @@ test("should sort the climbing player durin the definition of cards", async () =
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
 
   await wrapper.findAll(".player-climb-cards__input").at(0)?.setValue(2);
   await wrapper.findAll(".player-climb-cards__input").at(1)?.setValue(10);
@@ -131,37 +129,59 @@ test("should process the cards and go back to rounds with updated points", async
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
+  
+  const playerA = wrapper.find('[data-test="A"]')
+  const playerB = wrapper.find('[data-test="B"]')
 
-  await wrapper.findAll(".player-climb-cards__input").at(0)?.setValue(2);
-  await wrapper.findAll(".player-climb-cards__input").at(1)?.setValue(10);
+  await playerA.setValue(2);
+  await playerB.setValue(10);
 
-  await wrapper.find('[data-testid="process_values"]').trigger("click");
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
 
-  expect(wrapper.find(".round").text()).toBe("Rodada: 2 / 3");
+  expect(wrapper.find(".rounds").text()).toBe("Rodadas: 1 / 3");
   expect(wrapper.findAll(".player-name").at(0)?.text()).toBe("A");
   expect(wrapper.findAll(".player-points").at(0)?.text()).toBe("2");
   expect(wrapper.findAll(".player-name").at(1)?.text()).toBe("B");
   expect(wrapper.findAll(".player-points").at(1)?.text()).toBe("1");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
 
-  expect(wrapper.findAll(".round").at(1)?.text()).toBe("Rodada: 2 / 3");
+  expect(wrapper.find(".climbing-info__round").text()).toBe("Rodada atual: 2");
 
   const firstInput = wrapper.findAll(".player-climb-cards__input").at(0)
     ?.element as HTMLInputElement;
   expect(firstInput.value).toBe("0");
 
-  await wrapper.findAll(".player-climb-cards__input").at(0)?.setValue(5);
-  await wrapper.findAll(".player-climb-cards__input").at(1)?.setValue(4);
+  await playerA.setValue(5);
+  await playerB.setValue(4);
 
-  await wrapper.find('[data-testid="process_values"]').trigger("click");
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
 
-  expect(wrapper.find(".round").text()).toBe("Rodada: 3 / 3");
+  expect(wrapper.find(".rounds").text()).toBe("Rodadas: 2 / 3");
   expect(wrapper.findAll(".player-name").at(0)?.text()).toBe("A");
   expect(wrapper.findAll(".player-points").at(0)?.text()).toBe("3");
   expect(wrapper.findAll(".player-name").at(1)?.text()).toBe("B");
   expect(wrapper.findAll(".player-points").at(1)?.text()).toBe("3");
+});
+
+test("should order the climbing players when update cards of each one", async () => {
+  const wrapper = mount(App, {});
+
+  await wrapper.find(".input-player").setValue("A");
+  await wrapper.find(".add-player").trigger("click");
+  await wrapper.find(".input-player").setValue("B");
+  await wrapper.find(".add-player").trigger("click");
+
+  await wrapper.find(".start-round").trigger("click");
+
+  expect(wrapper.findAll(".player-climb-name").at(0)?.text()).toBe("A");
+  expect(wrapper.findAll(".player-climb-name").at(1)?.text()).toBe("B");
+  
+  await wrapper.findAll(".player-climb-cards__input").at(1)?.setValue(10);
+  expect(wrapper.findAll(".player-climb-name").at(0)?.text()).toBe("B");
+  await wrapper.findAll(".player-climb-cards__input").at(0)?.setValue(2);
+  expect(wrapper.findAll(".player-climb-name").at(1)?.text()).toBe("A");
 });
 
 test("should process a draw cards count and go back to rounds with updated points", async () => {
@@ -171,17 +191,77 @@ test("should process a draw cards count and go back to rounds with updated point
   await wrapper.find(".add-player").trigger("click");
   await wrapper.find(".input-player").setValue("B");
   await wrapper.find(".add-player").trigger("click");
+  await wrapper.find(".input-player").setValue("C");
+  await wrapper.find(".add-player").trigger("click");
 
-  await wrapper.find(".start-climbing").trigger("click");
+  await wrapper.find(".start-round").trigger("click");
+
+  const playerA = wrapper.find('[data-test="A"]')
+  const playerB = wrapper.find('[data-test="B"]')
+  const playerC = wrapper.find('[data-test="C"]')
+
+  await playerA.setValue(10);
+  await playerB.setValue(10);
+  await playerC.setValue(5);
+
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
+
+  expect(wrapper.find(".rounds").text()).toBe("Rodadas: 1 / 3");
+  expect(wrapper.findAll(".player-name").at(0)?.text()).toBe("C");
+  expect(wrapper.findAll(".player-points").at(0)?.text()).toBe("3");
+
+  expect(wrapper.findAll(".player-name").at(1)?.text()).toBe("A");
+  expect(wrapper.findAll(".player-points").at(1)?.text()).toBe("2");
+
+  expect(wrapper.findAll(".player-name").at(2)?.text()).toBe("B");
+  expect(wrapper.findAll(".player-points").at(2)?.text()).toBe("2");
+});
+
+test('should not be able to add a new player if the game already started', async () => {
+  const wrapper = mount(App, {});
+
+  await wrapper.find(".input-player").setValue("A");
+  await wrapper.find(".add-player").trigger("click");
+  await wrapper.find(".input-player").setValue("B");
+  await wrapper.find(".add-player").trigger("click");
+
+  await wrapper.find(".start-round").trigger("click");
 
   await wrapper.findAll(".player-climb-cards__input").at(0)?.setValue(10);
   await wrapper.findAll(".player-climb-cards__input").at(1)?.setValue(10);
 
-  await wrapper.find('[data-testid="process_values"]').trigger("click");
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
 
-  expect(wrapper.find(".round").text()).toBe("Rodada: 2 / 3");
-  expect(wrapper.findAll(".player-name").at(0)?.text()).toBe("B");
-  expect(wrapper.findAll(".player-points").at(0)?.text()).toBe("2");
-  expect(wrapper.findAll(".player-name").at(1)?.text()).toBe("A");
-  expect(wrapper.findAll(".player-points").at(1)?.text()).toBe("2");
-});
+  expect(wrapper.find(".input-player").isVisible()).toBe(false)
+  expect(wrapper.find(".add-player").isVisible()).toBe(false)
+})
+
+test('should show the winner screen after the third round', async () => {
+  const wrapper = mount(App, {});
+
+  await wrapper.find(".input-player").setValue("A");
+  await wrapper.find(".add-player").trigger("click");
+  await wrapper.find(".input-player").setValue("B");
+  await wrapper.find(".add-player").trigger("click");
+  
+  await wrapper.find(".start-round").trigger("click");
+
+  await wrapper.find('[data-test="A"]').setValue(10);
+  await wrapper.find('[data-test="B"]').setValue(5);
+  expect(wrapper.find('.climbing-info__round').text()).toBe('Rodada atual: 1')
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
+
+  await wrapper.find(".start-round").trigger("click");
+  await wrapper.find('[data-test="A"]').setValue(15);
+  await wrapper.find('[data-test="B"]').setValue(2);
+  expect(wrapper.find('.climbing-info__round').text()).toBe('Rodada atual: 2')
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
+
+  await wrapper.find(".start-round").trigger("click");
+  await wrapper.find('[data-test="A"]').setValue(20);
+  await wrapper.find('[data-test="B"]').setValue(1);
+  expect(wrapper.find('.climbing-info__round').text()).toBe('Rodada atual: 3')
+  await wrapper.find('[data-test="finish_round"]').trigger("click");
+
+  expect(wrapper.find('.winner-congrats').text()).toBe('Congratulations! B is the Winner with 6 points')
+})
