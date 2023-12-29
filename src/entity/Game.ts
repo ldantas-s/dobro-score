@@ -44,6 +44,13 @@ export default class Game {
     return this.rounds.length;
   }
 
+  isFinished(): boolean {
+    return this.status === "finished";
+  }
+  isIdle(): boolean {
+    return this.status === 'idle'
+  }
+
   reset(): void {
     this._players = [];
     this.rounds = [];
@@ -55,14 +62,19 @@ export default class Game {
     this._players.push(new Player(name));
   }
 
+  private notAllowedToChangeGameInfo(): boolean {
+    return this.hasNotPlayersEnough() || this.isFinished();
+  }
   startRound() {
-    if (this.hasNotPlayersEnough()) return;
+    if (this.notAllowedToChangeGameInfo()) return;
 
     this.status = "progress";
     this.rounds.push(new Round("started"));
   }
 
   finishRound() {
+    if (this.notAllowedToChangeGameInfo()) return;
+
     const points: number[] = [];
 
     this._players.forEach((player) => {

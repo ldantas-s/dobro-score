@@ -160,7 +160,7 @@ test("should return the end of the game and the information about the winner", a
   game.playersOrderByCards[1].cards = 20;
   game.finishRound();
 
-  expect(game.status).toBe("finished");
+  expect(game.isFinished()).toBeTruthy();
   expect(game.winnerPlayer.name).toBe("A");
   expect(game.winnerPlayer.points).toBe(6);
 });
@@ -182,3 +182,5 @@ test("should be able to reset the game", () => {
   expect(game.playersOrderByCards.length).toBe(0);
   expect(game.status).toBe("idle");
 });
+
+test.todo('should do nothing if it is not allowed to change the game information')
