@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import Button from './Button.vue';
 import Game from '../entity/Game';
 
-const props = defineProps<{ game: InstanceType<typeof Game> }>()
 const playerName = ref('')
+const game = inject('game') as Game
 const addPlayer = () => {
-	props.game.addPlayer(playerName.value)
+	game.addPlayer(playerName.value)
 	playerName.value = ''
 }
 </script>
 <template>
 	<div v-show="game.isIdle()">
-		<input type="text" class="input-player" v-model="playerName" />
+		<input type="text" class="input-player" v-model.trim="playerName" />
 		<Button data-test="add-player__button" :click="addPlayer" :disabled="game.hasLimitPlayers()">Adicionar Jogador</Button>
 	</div>
 </template>
