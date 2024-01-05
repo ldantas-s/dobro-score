@@ -19,7 +19,7 @@ const start = () => {
 </script>
 <template>
   <section class="round-info">
-    <div class="text-center info-section">
+    <div class="text-center py-16">
       <RoundTitle data-test="round-title__rounds" :title="`Rodadas: ${game.currentRound()} / 3`" />
       <h3 class="distribuition-cards title-3">Distribuir {{ game.cardToDistribute() }} cartas</h3>
     </div>
@@ -32,8 +32,4 @@ const start = () => {
     </Button>
   </section>
 </template>
-<style scoped>
-.info-section {
-  padding: 16px;
-}
-</style>
+<style scoped></style>
