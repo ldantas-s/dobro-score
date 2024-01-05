@@ -4,6 +4,7 @@
   --color-yellow: #FEC210;
   --color-blue: #00B8B9;
   --color-white: #fff;
+  --color-black: #110A0C;
 
   color-scheme: light dark;
   background-color: var(--color-red);
@@ -21,6 +22,9 @@ body {
   justify-content: center;
   min-height: 100vh;
   font-size: 16px;
+  font-family: 'Dosis', sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
 }
 
 img {

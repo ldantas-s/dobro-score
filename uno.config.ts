@@ -9,5 +9,6 @@ export default defineConfig({
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px` })],
     [/^py-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px 0` })],
     [/^px-([\.\d]+)$/, ([_, num]) => ({ padding: `0 ${num}px` })],
+    [/^radius-([\.\d]+)$/, ([_, num]) => ({ 'border-radius': `${num}px` })],
   ]
 })

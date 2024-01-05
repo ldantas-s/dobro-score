@@ -809,7 +809,7 @@
     "@unocss/preset-mini" "0.58.3"
     "@unocss/rule-utils" "0.58.3"
 
-"@unocss/reset@0.58.3":
+"@unocss/reset@0.58.3", "@unocss/reset@^0.58.3":
   version "0.58.3"
   resolved "https://registry.yarnpkg.com/@unocss/reset/-/reset-0.58.3.tgz#5f105583368f1febe4b668aaaa56bc155a751c3d"
   integrity sha512-Q2KiRQlam2iYsTZgKdvnXEfUN4TA2oVpGIVD9Wa0ggs0XlYj5aOo0g0+4Tgqqn+YaviZQeJKnDs/JWE+ygHhZA==
