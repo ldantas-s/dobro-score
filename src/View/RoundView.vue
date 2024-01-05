@@ -19,8 +19,10 @@ const start = () => {
 </script>
 <template>
   <section class="round-info">
-    <RoundTitle data-test="round-title__rounds" :title="`Rodadas: ${game.currentRound()} / 3`" />
-    <h3 class="distribuition-cards">Distribuir {{ game.cardToDistribute() }} cartas</h3>
+    <div class="text-center info-section">
+      <RoundTitle data-test="round-title__rounds" :title="`Rodadas: ${game.currentRound()} / 3`" />
+      <h3 class="distribuition-cards title-3">Distribuir {{ game.cardToDistribute() }} cartas</h3>
+    </div>
     <InputPlayer :game="(game as Game)" />
     <Table :heads="['Jogador', 'Pontos']">
       <TableBodyClimb :players="game.playersOrderByPoints" />
@@ -30,4 +32,8 @@ const start = () => {
     </Button>
   </section>
 </template>
-<style scoped></style>
+<style scoped>
+.info-section {
+  padding: 16px;
+}
+</style>
