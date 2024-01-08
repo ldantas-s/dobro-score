@@ -27,10 +27,6 @@ body {
   font-weight: 300;
 }
 
-img {
-  max-width: 100%;
-}
-
 #app {
   align-items:center;
   display: flex;
@@ -50,16 +46,4 @@ img {
   button {
     background-color: #f9f9f9;
   }
-}
-
-.title-2 {
-  font-weight: 500;
-  font-size: 1.5em;
-}
-.title-3 {
-  font-weight: 500;
-  font-size: 1rem;
-}
-.text-center {
-  text-align: center;
 }
