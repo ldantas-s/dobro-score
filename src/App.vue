@@ -3,9 +3,9 @@ import { provide, reactive, ref } from 'vue';
 
 import Game from './entity/Game'
 
-import RoundView from './View/RoundView.vue';
-import ClimbView from './View/ClimbView.vue';
-import WinnerView from './View/WinnerView.vue';
+import RoundView from './view/RoundView.vue';
+import ClimbView from './view/ClimbView.vue';
+import WinnerView from './view/WinnerView.vue';
 import Header from './components/Header.vue';
 
 const game = reactive(new Game())

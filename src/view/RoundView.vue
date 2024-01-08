@@ -18,7 +18,7 @@ const start = () => {
 }
 </script>
 <template>
-  <section class="round-info">
+  <section class="d-flex flex-column w-full">
     <div class="text-center py-16">
       <RoundTitle data-test="round-title__rounds" :title="`Rodadas: ${game.currentRound()} / 3`" />
       <h3 class="distribuition-cards title-3">Distribuir {{ game.cardToDistribute() }} cartas</h3>
