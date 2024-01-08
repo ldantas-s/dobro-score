@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import RoundView from '../../src/View/RoundView.vue';
+import RoundView from '../../src/view/RoundView.vue';
 import Game from '../../src/entity/Game';
 
 test('should show that need to distribute 5 cards if 6 players was registered', async () => {

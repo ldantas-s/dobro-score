@@ -14,10 +14,10 @@ test('should add a player and clear the input', async () => {
       },
     },
   });
-  await wrapper.find('.input-player').setValue('A');
+  await wrapper.find('[data-test="input-player"]').setValue('A');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
   expect(addPlayerSpy).toHaveBeenCalledWith('A');
-  const input = wrapper.find('.input-player').element as HTMLInputElement;
+  const input = wrapper.find('[data-test="input-player"]').element as HTMLInputElement;
   expect(input.value).toBe('');
 });
 
@@ -46,5 +46,5 @@ test('should not show the component if the game is not idle', async () => {
       },
     },
   });
-  expect(wrapper.find('.input-player').isVisible()).toBeFalsy();
+  expect(wrapper.find('[data-test="input-player"]').isVisible()).toBeFalsy();
 });

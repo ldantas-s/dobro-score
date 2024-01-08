@@ -2,10 +2,10 @@
 import { inject } from 'vue';
 
 import Table from '../components/Table.vue';
-import RoundTitle from '../components/RoundTitle.vue';
 import Button from '../components/Button.vue';
 import Row from '../components/Row.vue';
 import Game from '../entity/Game';
+import TableRow from '../components/TableRow.vue';
 
 const game = inject('game') as Game
 const toggleView = inject('toggleView') as Function
@@ -22,14 +22,19 @@ const finish = () => {
 
 </script>
 <template>
-  <section class="climbing-info">
-    <h1>Escaladas</h1>
-    <RoundTitle data-test="round-title__climbs" :title="`Rodada atual: ${game.currentRound()}`" />
-    <Table :heads="['Nome', 'Esquecido', 'Q. Cartas', 'Posição (Mais Cartas)', 'Pontos']">
-      <tr data-test="player-climb" v-for="(player, key) in game.playersOrderByCards" :key="player.name">
-        <Row :player="player" :order="key + 1" />
-      </tr>
-    </Table>
+  <section class="climbing-info d-flex flex-column">
+    <div class="text-center py-16">
+      <h1 class="title-1">Escaladas</h1>
+      <h2 class="title-2" data-test="round-title__climbs">Rodada atual: {{ game.currentRound() }}</h2>
+    </div>
+    <div>
+      <Table :heads="['Nome', 'Esquecido', 'Q. Cartas', 'Posição (Mais Cartas)', 'Pontos']">
+        <TableRow data-test="player-climb" v-for="(player, key) in game.playersOrderByCards" :is-even="key % 2 === 0"
+          :key="player.name">
+          <Row :player="player" :order="key + 1" />
+        </TableRow>
+      </Table>
+    </div>
     <Button data-test="finish_round" :click="finish">Finalizar Rodada</Button>
   </section>
 </template>

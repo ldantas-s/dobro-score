@@ -44,7 +44,7 @@ export default defineConfig({
   ],
   rules: [
     [/^d-flex/, () => ({ display: 'flex' })],
-    [/^flex-column/, () => ({ 'flex-direction': 'column' })],
+    [/^flex-(column|row)$/, ([_, direction]) => ({ 'flex-direction': direction })],
     [/^gap-([\.\d]+)$/, ([_, num]) => ({ gap: `${num}px` })],
     
     [/^w-full/, () => ({ 'width': '100%' })],
@@ -54,11 +54,12 @@ export default defineConfig({
     [/^text-base/, () => ({ 'font-size': '1rem', 'line-height': '1.5rem' })],
     [/^text-lg/, () => ({ 'font-size': '1.5rem','line-height': '2rem' })],
 
-    
     [/^bold-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
     [/^m-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px` })],
+    
     [/^my-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px 0` })],
     [/^mx-([\.\d]+)$/, ([_, num]) => ({ margin: `0 ${num}px` })],
+    
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px` })],
     [/^py-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px 0` })],
     [/^px-([\.\d]+)$/, ([_, num]) => ({ padding: `0 ${num}px` })],
@@ -77,8 +78,8 @@ export default defineConfig({
     ],
   ],
   shortcuts: {
-    'title-2': 'bold-500 text-lg',
-    'title-3': 'bold-500 text-base',
+    'title-1': 'bold-500 text-lg',
+    'title-2': 'bold-500 text-base',
   }
 });
 

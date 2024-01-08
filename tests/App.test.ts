@@ -5,9 +5,9 @@ import App from '../src/App.vue';
 test('should process the cards and go back to rounds with updated points', async () => {
   const wrapper = mount(App, {});
 
-  await wrapper.find('.input-player').setValue('A');
+  await wrapper.find('[data-test="input-player"]').setValue('A');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
-  await wrapper.find('.input-player').setValue('B');
+  await wrapper.find('[data-test="input-player"]').setValue('B');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
 
   await wrapper.find('[data-test="start_round"]').trigger('click');
@@ -55,11 +55,11 @@ test('should process the cards and go back to rounds with updated points', async
 test('should process a draw cards count and go back to rounds with updated points', async () => {
   const wrapper = mount(App, {});
 
-  await wrapper.find('.input-player').setValue('A');
+  await wrapper.find('[data-test="input-player"]').setValue('A');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
-  await wrapper.find('.input-player').setValue('B');
+  await wrapper.find('[data-test="input-player"]').setValue('B');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
-  await wrapper.find('.input-player').setValue('C');
+  await wrapper.find('[data-test="input-player"]').setValue('C');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
 
   await wrapper.find('[data-test="start_round"]').trigger('click');
@@ -90,9 +90,9 @@ test('should process a draw cards count and go back to rounds with updated point
 test('should not show the input player if the game already started', async () => {
   const wrapper = mount(App, {});
 
-  await wrapper.find('.input-player').setValue('A');
+  await wrapper.find('[data-test="input-player"]').setValue('A');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
-  await wrapper.find('.input-player').setValue('B');
+  await wrapper.find('[data-test="input-player"]').setValue('B');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
 
   await wrapper.find('[data-test="start_round"]').trigger('click');
@@ -102,7 +102,7 @@ test('should not show the input player if the game already started', async () =>
 
   await wrapper.find('[data-test="finish_round"]').trigger('click');
 
-  expect(wrapper.find('.input-player').isVisible()).toBe(false);
+  expect(wrapper.find('[data-test="input-player"]').isVisible()).toBe(false);
   expect(wrapper.find('[data-test="add-player__button"]').isVisible()).toBe(
     false
   );
@@ -111,9 +111,9 @@ test('should not show the input player if the game already started', async () =>
 test('should show the winner screen after the third round', async () => {
   const wrapper = mount(App, {});
 
-  await wrapper.find('.input-player').setValue('A');
+  await wrapper.find('[data-test="input-player"]').setValue('A');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
-  await wrapper.find('.input-player').setValue('B');
+  await wrapper.find('[data-test="input-player"]').setValue('B');
   await wrapper.find('[data-test="add-player__button"]').trigger('click');
 
   await wrapper.find('[data-test="start_round"]').trigger('click');
@@ -143,7 +143,7 @@ test('should show the winner screen after the third round', async () => {
 
   expect(wrapper.find('[data-test="view-winner"]').isVisible()).toBeTruthy();
   expect(wrapper.find('.climbing-info').isVisible()).toBeFalsy();
-  expect(wrapper.find('.round-info').isVisible()).toBeFalsy();
+  expect(wrapper.find('[data-test="round-info"]').isVisible()).toBeFalsy();
   expect(wrapper.find('.winner-congrats').text()).toBe(
     'Congratulations! B is the Winner with 6 points'
   );

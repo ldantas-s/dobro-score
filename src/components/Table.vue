@@ -2,10 +2,10 @@
 defineProps<{ heads: string[] }>()
 </script>
 <template>
-	<table>
+	<table class="my-8 w-full">
 		<thead>
 			<tr>
-				<th v-for="head in heads" :key="head">{{ head }}</th>
+				<th class="p-16 bg-green-500" v-for="head in heads" :key="head">{{ head }}</th>
 			</tr>
 		</thead>
 		<tbody>

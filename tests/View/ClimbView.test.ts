@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import ClimbView from '../../src/View/ClimbView.vue';
+import ClimbView from '../../src/view/ClimbView.vue';
 import Game from '../../src/entity/Game';
 
 test('should show the climbing table with 2 players', async () => {
