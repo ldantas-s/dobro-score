@@ -12,8 +12,8 @@ const addPlayer = () => {
 </script>
 <template>
 	<div v-show="game.isIdle()" class="d-flex flex-column gap-8">
-		<input type="text" data-test="input-player" class="rounded-2 text-black h-36 text-center bg-white" v-model.trim="playerName" />
-		<Button data-test="add-player__button" :click="addPlayer" :disabled="game.hasLimitPlayers()">
+		<input type="text" data-test="input-player" class="rounded-2 text-black p-16 text-center bg-white bold-400" v-model.trim="playerName" />
+		<Button data-test="add-player__button" @click="addPlayer" :disabled="game.hasLimitPlayers()">
 			Adicionar Jogador
 		</Button>
 	</div>

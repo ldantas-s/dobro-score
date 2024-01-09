@@ -29,7 +29,7 @@ const start = () => {
         <td class="player-points">{{ player.points }}</td>
       </TableRow>
     </Table>
-    <Button data-test="start_round" :disabled="game.hasNotPlayersEnough()" :click="start">
+    <Button data-test="start_round" :disabled="game.hasNotPlayersEnough()" @click="start">
       Começar Rodada {{ game.currentRound() + 1 }}
     </Button>
   </section>
