@@ -20,14 +20,14 @@ export default defineConfig({
         600: '#00A8A8',
       },
       green: {
-        400: "#29D159",
-        500: "#23B24B",
-        600: "#20A245",
+        400: '#29D159',
+        500: '#23B24B',
+        600: '#20A245',
       },
       gray: {
-        400: "#D6D6D6",
-        500: "#CCCCCC",
-        600: "#A3A3A3",
+        400: '#D6D6D6',
+        500: '#CCCCCC',
+        600: '#A3A3A3',
       },
       white: '#ffffff',
       black: '#110A0C',
@@ -44,22 +44,30 @@ export default defineConfig({
   ],
   rules: [
     [/^d-flex/, () => ({ display: 'flex' })],
-    [/^flex-(column|row)$/, ([_, direction]) => ({ 'flex-direction': direction })],
+    [
+      /^flex-(column|row)$/,
+      ([_, direction]) => ({ 'flex-direction': direction }),
+    ],
     [/^gap-([\.\d]+)$/, ([_, num]) => ({ gap: `${num}px` })],
-    
-    [/^w-full/, () => ({ 'width': '100%' })],
+    [
+      /^overflow-(x|y)-(auto|hidden|scroll)$/,
+      ([_, direction, option]) => ({ [`overflow-${direction}`]: option }),
+    ],
+
+    [/^w-full/, () => ({ width: '100%' })],
     [/^h-([\.\d]+)$/, ([_, num]) => ({ height: `${num}px` })],
+    [/^w-([\.\d]+)$/, ([_, num]) => ({ width: `${num}px` })],
 
     [/^text-center/, () => ({ 'text-align': 'center' })],
     [/^text-base/, () => ({ 'font-size': '1rem', 'line-height': '1.5rem' })],
-    [/^text-lg/, () => ({ 'font-size': '1.5rem','line-height': '2rem' })],
+    [/^text-lg/, () => ({ 'font-size': '1.5rem', 'line-height': '2rem' })],
 
     [/^bold-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
     [/^m-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px` })],
-    
+
     [/^my-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px 0` })],
     [/^mx-([\.\d]+)$/, ([_, num]) => ({ margin: `0 ${num}px` })],
-    
+
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px` })],
     [/^py-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px 0` })],
     [/^px-([\.\d]+)$/, ([_, num]) => ({ padding: `0 ${num}px` })],
@@ -80,7 +88,7 @@ export default defineConfig({
   shortcuts: {
     'title-1': 'bold-500 text-lg',
     'title-2': 'bold-500 text-base',
-  }
+  },
 });
 
 const colorsBy = function (prop: string) {

@@ -6,6 +6,7 @@ import Button from '../components/Button.vue';
 import Row from '../components/Row.vue';
 import Game from '../entity/Game';
 import TableRow from '../components/TableRow.vue';
+import Player from '../entity/Player';
 
 const game = inject('game') as Game
 const toggleView = inject('toggleView') as Function
@@ -19,23 +20,28 @@ const finish = () => {
 
   toggleView('score')
 }
+const changePlayerInfo = (player: Player) => {
+  console.log(player.name)
+}
 
 </script>
 <template>
-  <section class="climbing-info d-flex flex-column">
+  <section class="climbing-info" style="width: 100vw;">
     <div class="text-center py-16">
       <h1 class="title-1">Escaladas</h1>
       <h2 class="title-2" data-test="round-title__climbs">Rodada atual: {{ game.currentRound() }}</h2>
     </div>
-    <div>
+    <div class="overflow-y-hidden my-8 px-8">
       <Table :heads="['Nome', 'Esquecido', 'Q. Cartas', 'Posição (Mais Cartas)', 'Pontos']">
         <TableRow data-test="player-climb" v-for="(player, key) in game.playersOrderByCards" :is-even="key % 2 === 0"
-          :key="player.name">
+          :key="player.name" @click="changePlayerInfo(player)">
           <Row :player="player" :order="key + 1" />
         </TableRow>
       </Table>
     </div>
-    <Button data-test="finish_round" :click="finish">Finalizar Rodada</Button>
+    <div class="d-flex justify-center">
+      <Button data-test="finish_round" @click="finish">Finalizar Rodada</Button>
+    </div>
   </section>
 </template>
 <style scoped></style>
