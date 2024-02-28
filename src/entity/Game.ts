@@ -1,19 +1,20 @@
-import Player from "./Player";
-import Round from "./Round";
+import Player from './Player';
+import Round from './Round';
 
-type StatusGame = "idle" | "progress" | "finished";
+type StatusGame = 'idle' | 'progress' | 'finished';
 
 export default class Game {
   private _players: Player[] = [];
   rounds: Round[] = [];
-  status: StatusGame = "idle";
+  status: StatusGame = 'idle';
+  private forgottenPlayerName: string = '';
 
   get playersOrderByPoints(): Player[] {
-    return this._players.sort(this.sortByGreaterThan("points"));
+    return this._players.sort(this.sortByGreaterThan('points'));
   }
 
   get playersOrderByCards(): Player[] {
-    return [...this._players.sort(this.sortByGreaterThan("cards"))];
+    return [...this._players.sort(this.sortByGreaterThan('cards'))];
   }
 
   get winnerPlayer(): Player {
@@ -45,20 +46,20 @@ export default class Game {
   }
 
   isFinished(): boolean {
-    return this.status === "finished";
+    return this.status === 'finished';
   }
   isIdle(): boolean {
-    return this.status === 'idle'
+    return this.status === 'idle';
   }
 
   reset(): void {
     this._players = [];
     this.rounds = [];
-    this.status = "idle";
+    this.status = 'idle';
   }
 
   addPlayer(name: string) {
-    if (!name || this.status === "progress" || this.hasLimitPlayers()) return;
+    if (!name || this.status === 'progress' || this.hasLimitPlayers()) return;
     this._players.push(new Player(name));
   }
 
@@ -68,9 +69,13 @@ export default class Game {
   startRound() {
     if (this.notAllowedToChangeGameInfo()) return;
 
-    this.status = "progress";
-    this.rounds.push(new Round("started"));
+    this.status = 'progress';
+    this.rounds.push(new Round('started'));
   }
+
+  defineForgottenPlayer = (playerName: string): void => {
+    this.forgottenPlayerName = playerName;
+  };
 
   finishRound() {
     if (this.notAllowedToChangeGameInfo()) return;
@@ -91,12 +96,16 @@ export default class Game {
 
     this._players.forEach((player) => {
       player.points += hashMapPoints[player.cards];
+      if (player.name === this.forgottenPlayerName) {
+        player.points -= 1;
+        this.forgottenPlayerName = '';
+      }
       playersRound.push(Object.assign({}, player));
       player.cards = 0;
     });
 
     this.rounds[this.rounds.length - 1].updatePlayers(playersRound);
 
-    if (this.currentRound() === 3) this.status = "finished";
+    if (this.currentRound() === 3) this.status = 'finished';
   }
 }

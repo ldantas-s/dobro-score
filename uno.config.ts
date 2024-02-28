@@ -44,10 +44,12 @@ export default defineConfig({
   ],
   rules: [
     [/^d-flex/, () => ({ display: 'flex' })],
+    [/^items-(center|flex-start|flex-end)$/, ([_, opt]) => ({ 'align-items': opt })],
     [
       /^flex-(column|row)$/,
       ([_, direction]) => ({ 'flex-direction': direction }),
     ],
+
     [/^gap-([\.\d]+)$/, ([_, num]) => ({ gap: `${num}px` })],
     [
       /^overflow-(x|y)-(auto|hidden|scroll)$/,

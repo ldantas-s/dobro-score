@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import Player from '../entity/Player';
-
 type Row = {
   player: Player
   order: number
 }
-defineProps<Row>()
+const props = defineProps<Row>()
+const event = defineEmits(['defineForgotten'])
 </script>
 
 <template>
-  <td class="px-24" :data-test="`${player.name}-name`">{{ player.name }}</td>
-  <td class="p-8"><input type="radio" name="forgoteen" class="player-climb-forgotten" /></td>
+  <td class="px-24" :data-test="`${props.player.name}-name`">{{ props.player.name }}</td>
   <td class="p-8">
-    <input type="number" :data-test="`${player.name}-cards`" class="player-climb-cards__input w-42"
-      v-model.lazy="player.cards" />
+    <input type="checkbox" name="forgotten" :data-test="`player-climb-forgotten-${props.player.name}`"
+      class="player-climb-forgotten" @click="$emit('defineForgotten', player.name)" />
   </td>
-  <td class="player-climb-position" :data-test="`${player.name}-position`">{{ order }}o</td>
-  <td class="player-climb-point" :data-test="`${player.name}-points`">{{ order }}</td>
+  <td class="p-8">
+    <input type="number" :data-test="`${props.player.name}-cards`" class="player-climb-cards__input w-42"
+      v-model.lazy="props.player.cards" />
+  </td>
+  <td class="player-climb-position" :data-test="`${props.player.name}-position`">{{ props.order }}o</td>
+  <td class="player-climb-point" :data-test="`${props.player.name}-points`">{{ props.order }}</td>
 </template>
 
 <style scoped></style>

@@ -14,19 +14,22 @@ test('should process the cards and go back to rounds with updated points', async
 
   const playerA = wrapper.find('[data-test="A-cards"]');
   const playerB = wrapper.find('[data-test="B-cards"]');
+  const playerAForgotten = wrapper.find(
+    '[data-test="player-climb-forgotten-A"]'
+  );
 
   await playerA.setValue(2);
   await playerB.setValue(10);
+
+  await playerAForgotten.trigger('click');
 
   await wrapper.find('[data-test="finish_round"]').trigger('click');
 
   expect(wrapper.find('[data-test="round-title__rounds"]').text()).toBe(
     'Rodadas: 1 / 3'
   );
-  expect(wrapper.findAll('.player-name').at(0)?.text()).toBe('A');
-  expect(wrapper.findAll('.player-points').at(0)?.text()).toBe('2');
-  expect(wrapper.findAll('.player-name').at(1)?.text()).toBe('B');
-  expect(wrapper.findAll('.player-points').at(1)?.text()).toBe('1');
+  expect(wrapper.find('[data-test="player-points-A"]').text()).toBe('1');
+  expect(wrapper.find('[data-test="player-points-B"]').text()).toBe('1');
 
   await wrapper.find('[data-test="start_round"]').trigger('click');
 
@@ -46,10 +49,8 @@ test('should process the cards and go back to rounds with updated points', async
   expect(wrapper.find('[data-test="round-title__rounds"]').text()).toBe(
     'Rodadas: 2 / 3'
   );
-  expect(wrapper.findAll('.player-name').at(0)?.text()).toBe('A');
-  expect(wrapper.findAll('.player-points').at(0)?.text()).toBe('3');
-  expect(wrapper.findAll('.player-name').at(1)?.text()).toBe('B');
-  expect(wrapper.findAll('.player-points').at(1)?.text()).toBe('3');
+  expect(wrapper.find('[data-test="player-points-A"]').text()).toBe('2');
+  expect(wrapper.find('[data-test="player-points-B"]').text()).toBe('3');
 });
 
 test('should process a draw cards count and go back to rounds with updated points', async () => {
@@ -142,8 +143,8 @@ test('should show the winner screen after the third round', async () => {
   await wrapper.find('[data-test="finish_round"]').trigger('click');
 
   expect(wrapper.find('[data-test="view-winner"]').isVisible()).toBeTruthy();
-  expect(wrapper.find('.climbing-info').isVisible()).toBeFalsy();
-  expect(wrapper.find('[data-test="round-info"]').isVisible()).toBeFalsy();
+  expect(wrapper.find('.climbing-info').exists()).toBeFalsy();
+  expect(wrapper.find('[data-test="round-info"]').exists()).toBeFalsy();
   expect(wrapper.find('.winner-congrats').text()).toBe(
     'Congratulations! B is the Winner with 6 points'
   );

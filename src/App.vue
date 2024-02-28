@@ -29,9 +29,9 @@ provide('toggleView', toggleView)
 
 <template>
   <Header />
-  <RoundView v-show="checkStatusView(statusView).isScoreView" />
-  <ClimbView v-show="checkStatusView(statusView).isClimbView" />
-  <WinnerView v-show="checkStatusView(statusView).isWinView" />
+  <RoundView v-if="checkStatusView(statusView).isScoreView" />
+  <ClimbView v-if="checkStatusView(statusView).isClimbView" />
+  <WinnerView v-if="checkStatusView(statusView).isWinView" />
 </template>
 
 <style scoped></style>
