@@ -6,7 +6,6 @@
   --color-white: #fff;
   --color-black: #110A0C;
 
-  color-scheme: light dark;
   background-color: var(--color-red);
   color: var(--color-white);
 
@@ -34,17 +33,4 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 1rem;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
