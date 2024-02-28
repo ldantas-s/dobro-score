@@ -11,11 +11,11 @@ const event = defineEmits(['defineForgotten'])
 <template>
   <td class="px-24" :data-test="`${props.player.name}-name`">{{ props.player.name }}</td>
   <td class="p-8">
-    <input type="checkbox" name="forgotten" :data-test="`player-climb-forgotten-${props.player.name}`"
+    <input type="radio" name="forgotten" :data-test="`player-climb-forgotten-${props.player.name}`"
       class="player-climb-forgotten" @click="$emit('defineForgotten', player.name)" />
   </td>
   <td class="p-8">
-    <input type="number" :data-test="`${props.player.name}-cards`" class="player-climb-cards__input w-42"
+    <input type="number" :data-test="`${props.player.name}-cards`" class="player-climb-cards__input w-42 text-center"
       v-model.lazy="props.player.cards" />
   </td>
   <td class="player-climb-position" :data-test="`${props.player.name}-position`">{{ props.order }}o</td>
