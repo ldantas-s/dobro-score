@@ -17,8 +17,36 @@ export default class Game {
     return [...this._players.sort(this.sortByGreaterThan('cards'))];
   }
 
-  get winnerPlayer(): Player {
-    return this.playersOrderByPoints[0];
+  get winnerPlayer(): Player[] {
+    const lastRound = this.rounds[this.rounds.length - 1];
+    const playersPoints: { [key: number]: Player[] } = {};
+    let heghiestPoint = 0;
+
+    for (const player of lastRound.players) {
+      if (player.points > heghiestPoint) heghiestPoint = player.points;
+      playersPoints[player.points] = [
+        ...(playersPoints[player.points] ?? []),
+        player,
+      ];
+    }
+
+    if (playersPoints[heghiestPoint].length === 1)
+      return playersPoints[heghiestPoint];
+
+    const playersCards: { [key: number]: Player[] } = {};
+    const qtdCards = [];
+
+    for (const player of playersPoints[heghiestPoint]) {
+      playersCards[player.cards] = [
+        ...(playersCards[player.cards] ?? []),
+        player,
+      ];
+      qtdCards.push(player.cards);
+      qtdCards.sort();
+    }
+    
+
+    return playersCards[qtdCards[0]];
   }
 
   private sortByGreaterThan(prop: keyof Player) {

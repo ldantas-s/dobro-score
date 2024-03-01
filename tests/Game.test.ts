@@ -132,7 +132,7 @@ test('should sort the players by cards during the addition cards quantity', asyn
   game.finishRound();
 });
 
-test('should return the end of the game and the information about the winner', async () => {
+test('should return the end of the game and the information about the winner', () => {
   const game = new Game();
 
   game.addPlayer('A');
@@ -161,8 +161,8 @@ test('should return the end of the game and the information about the winner', a
   game.finishRound();
 
   expect(game.isFinished()).toBeTruthy();
-  expect(game.winnerPlayer.name).toBe('A');
-  expect(game.winnerPlayer.points).toBe(6);
+  expect(game.winnerPlayer[0].name).toBe('A');
+  expect(game.winnerPlayer[0].points).toBe(6);
 });
 
 test('should be able to reset the game', () => {
@@ -207,4 +207,79 @@ test('should return the correct points for forgotten player', async () => {
 
   expect(game.playersOrderByPoints[0].name).toBe('A');
   expect(game.playersOrderByPoints[0].points).toBe(3);
+});
+
+test('should return the winner with less cart in draw case', () => {
+  const game = new Game();
+
+  game.addPlayer('A');
+  game.addPlayer('B');
+  expect(game.rounds.length).toBe(0);
+
+  game.startRound();
+  expect(game.rounds.length).toBe(1);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 1;
+  game.playersOrderByCards[1].cards = 2;
+  game.finishRound();
+
+  game.startRound();
+  expect(game.rounds.length).toBe(2);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 1;
+  game.playersOrderByCards[1].cards = 2;
+  game.defineForgottenPlayer('A');
+  game.finishRound();
+
+  game.startRound();
+  expect(game.rounds.length).toBe(3);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 2;
+  game.playersOrderByCards[1].cards = 1;
+  game.finishRound();
+
+  expect(game.isFinished()).toBeTruthy();
+  expect(game.winnerPlayer[0].name).toBe('B');
+  expect(game.winnerPlayer[0].points).toBe(4);
+});
+
+test('should return the winners with less cart in draw case', () => {
+  const game = new Game();
+
+  game.addPlayer('A');
+  game.addPlayer('B');
+  game.addPlayer('C');
+  expect(game.rounds.length).toBe(0);
+
+  game.startRound();
+  expect(game.rounds.length).toBe(1);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 1;
+  game.playersOrderByCards[1].cards = 1;
+  game.playersOrderByCards[2].cards = 2;
+  game.finishRound();
+
+  game.startRound();
+  expect(game.rounds.length).toBe(2);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 1;
+  game.playersOrderByCards[1].cards = 1;
+  game.playersOrderByCards[2].cards = 2;
+  game.finishRound();
+
+  game.startRound();
+  expect(game.rounds.length).toBe(3);
+  expect(game.playersOrderByCards[0].name).toBe('A');
+  game.playersOrderByCards[0].cards = 1;
+  game.playersOrderByCards[1].cards = 1;
+  game.playersOrderByCards[2].cards = 2;
+  game.finishRound();
+
+  expect(game.isFinished()).toBeTruthy();
+  expect(game.winnerPlayer.length).toBe(2);
+
+  expect(game.winnerPlayer[0].name).toBe('A');
+  expect(game.winnerPlayer[0].points).toBe(9);
+  expect(game.winnerPlayer[1].name).toBe('B');
+  expect(game.winnerPlayer[1].points).toBe(9);
 });

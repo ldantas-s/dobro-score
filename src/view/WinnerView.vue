@@ -12,8 +12,9 @@ const newGame = () => {
 </script>
 <template>
   <section data-test="view-winner" class="d-flex flex-column">
-    <h1 class="winner-congrats text-center my-16 title-1">
-      Congratulations! {{ game.winnerPlayer?.name }} is the Winner with {{ game.winnerPlayer?.points }} points
+
+    <h1 v-for="player in game.winnerPlayer" :key="player.name" class="winner-congrats text-center my-16 title-1">
+      Congratulations! {{ player.name }} is the Winner with {{ player.points }} points
     </h1>
     <Button @click="newGame()">Novo jogo</Button>
   </section>
