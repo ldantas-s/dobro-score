@@ -43,58 +43,22 @@ export default defineConfig({
     },
   ],
   rules: [
-    [/^d-flex/, () => ({ display: 'flex' })],
-    [/^items-(center|flex-start|flex-end)$/, ([_, opt]) => ({ 'align-items': opt })],
-    [
-      /^flex-(column|row)$/,
-      ([_, direction]) => ({ 'flex-direction': direction }),
-    ],
-
-    [/^gap-([\.\d]+)$/, ([_, num]) => ({ gap: `${num}px` })],
     [
       /^overflow-(x|y)-(auto|hidden|scroll)$/,
       ([_, direction, option]) => ({ [`overflow-${direction}`]: option }),
     ],
 
-    [/^w-full/, () => ({ width: '100%' })],
-    [/^h-([\.\d]+)$/, ([_, num]) => ({ height: `${num}px` })],
-    [/^w-([\.\d]+)$/, ([_, num]) => ({ width: `${num}px` })],
-
-    [/^text-center/, () => ({ 'text-align': 'center' })],
-    [/^text-base/, () => ({ 'font-size': '1rem', 'line-height': '1.5rem' })],
     [/^text-lg/, () => ({ 'font-size': '1.5rem', 'line-height': '2rem' })],
 
     [/^bold-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
-    [/^m-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px` })],
-
-    [/^my-([\.\d]+)$/, ([_, num]) => ({ margin: `${num}px 0` })],
-    [/^mx-([\.\d]+)$/, ([_, num]) => ({ margin: `0 ${num}px` })],
 
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px` })],
     [/^py-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}px 0` })],
     [/^px-([\.\d]+)$/, ([_, num]) => ({ padding: `0 ${num}px` })],
     [/^rounded-([\.\d]+)$/, ([_, num]) => ({ 'border-radius': `${num}px` })],
-    [
-      /^text-(.*)$/,
-      ([, c], { theme }) => {
-        if (theme.colors[c]) return { color: theme.colors[c] };
-      },
-    ],
-    [
-      /^bg-(.*)$/,
-      ([, c], { theme }) => {
-        if (theme.colors[c]) return { 'background-color': theme.colors[c] };
-      },
-    ],
   ],
   shortcuts: {
     'title-1': 'bold-500 text-lg',
     'title-2': 'bold-500 text-base',
   },
 });
-
-const colorsBy = function (prop: string) {
-  return ([, c], { theme }) => {
-    if (theme.colors[c]) return { [prop]: theme.colors[c] };
-  };
-};

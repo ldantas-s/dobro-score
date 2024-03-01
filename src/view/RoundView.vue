@@ -16,7 +16,7 @@ const start = () => {
 };
 </script>
 <template>
-  <section data-test="round-info" class="d-flex flex-column w-full">
+  <section data-test="round-info" class="flex flex-col w-full">
     <div class="text-center py-16">
       <h1 class="title-1" data-test="round-title__rounds">
         Rodadas: {{ game.currentRound() }} / 3
@@ -26,8 +26,12 @@ const start = () => {
       </h3>
     </div>
     <InputPlayer />
-    <Table :heads="['Jogador', 'Pontos']">
-      <TableRow v-for="(player, index) in game.playersOrderByPoints" :is-even="index % 2 === 0" :key="player.name">
+    <Table :heads="['Jogador', 'Pontos']" class="my-2">
+      <TableRow
+        v-for="(player, index) in game.playersOrderByPoints"
+        :is-even="index % 2 === 0"
+        :key="player.name"
+      >
         <td class="player-name p-16" :data-test="`player-${player.name}`">
           {{ player.name }}
         </td>
@@ -36,7 +40,12 @@ const start = () => {
         </td>
       </TableRow>
     </Table>
-    <Button data-test="start_round" :disabled="game.hasNotPlayersEnough()" @click="start">
+    <Button
+      data-test="start_round"
+      :disabled="game.hasNotPlayersEnough()"
+      @click="start"
+      class="self-center"
+    >
       Começar Rodada {{ game.currentRound() + 1 }}
     </Button>
   </section>

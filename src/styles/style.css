@@ -19,7 +19,7 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   font-size: 16px;
   font-family: 'Dosis', sans-serif;
   line-height: 1.5;
@@ -32,5 +32,4 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem;
 }
