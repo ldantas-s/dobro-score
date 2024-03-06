@@ -11,7 +11,7 @@ const newGame = () => {
 };
 </script>
 <template>
-  <section data-test="view-winner" class="flex flex-col">
+  <section data-test="view-winner" class="flex flex-col lg:w-7/12">
     <h1
       v-for="player in game.winnerPlayer"
       :key="player.name"

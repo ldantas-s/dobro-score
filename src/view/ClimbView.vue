@@ -20,7 +20,7 @@ const finish = () => {
 };
 </script>
 <template>
-  <section class="flex flex-col w-full">
+  <section class="flex flex-col w-full lg:w-7/12">
     <div class="text-center py-16">
       <h1 class="title-1">Escaladas</h1>
       <h2 class="title-2" data-test="round-title__climbs">

@@ -16,7 +16,7 @@ const start = () => {
 };
 </script>
 <template>
-  <section data-test="round-info" class="flex flex-col w-full">
+  <section data-test="round-info" class="flex flex-col w-full lg:w-7/12">
     <div class="text-center py-16">
       <h1 class="title-1" data-test="round-title__rounds">
         Rodadas: {{ game.currentRound() }} / 3

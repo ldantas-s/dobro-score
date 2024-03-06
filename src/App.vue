@@ -27,7 +27,7 @@ provide('toggleView', toggleView);
 </script>
 
 <template>
-  <div class="p-16 flex flex-col lg:w-1/2 items-center">
+  <div class="p-16 flex flex-col items-center lg:flex-row w-screen">
     <Header></Header>
     <RoundView v-if="checkStatusView(statusView).isScoreView" />
     <ClimbView v-if="checkStatusView(statusView).isClimbView" />
