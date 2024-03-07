@@ -32,7 +32,7 @@ const start = () => {
         :is-even="index % 2 === 0"
         :key="player.name"
       >
-        <td class="player-name p-16" :data-test="`player-${player.name}`">
+        <td class="player-name p-16 lg:p-8" :data-test="`player-${player.name}`">
           {{ player.name }}
         </td>
         <td class="player-points" :data-test="`player-points-${player.name}`">

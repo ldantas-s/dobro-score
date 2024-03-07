@@ -12,7 +12,7 @@ const event = defineEmits(['defineForgotten']);
   <td class="px-24" :data-test="`${props.player.name}-name`">
     {{ props.player.name }}
   </td>
-  <td class="p-8">
+  <td class="p-16 lg:p-8">
     <input
       type="radio"
       name="forgotten"
@@ -21,7 +21,7 @@ const event = defineEmits(['defineForgotten']);
       @click="$emit('defineForgotten', player.name)"
     />
   </td>
-  <td class="p-8">
+  <td class="p-16 lg:p-8">
     <input
       type="number"
       :data-test="`${props.player.name}-cards`"

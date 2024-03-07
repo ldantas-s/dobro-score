@@ -17,13 +17,12 @@ const newGame = () => {
       :key="player.name"
       class="winner-congrats text-center text-white my-8 title-1 self-center"
     >
-      Congratulations!
+      Parabéns!
       <span
         class="before:content-[''] before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-green-600 relative inline-block"
       >
         <span class="relative text-white">{{ player.name }}</span>
-      </span>
-      is the Winner with {{ player.points }} points
+      </span> é o vencedor(a) com {{ player.points }} pontos
     </h1>
     <Button @click="newGame()">Novo jogo</Button>
   </section>
