@@ -31,7 +31,7 @@ const finish = () => {
       :heads="[
         'Nome',
         'Esquecido',
-        'Cartas',
+        'Q. Cartas',
         'Posição',
         'Pontos',
       ]"
