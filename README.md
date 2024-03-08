@@ -1,42 +1,45 @@
-# Dobro Score
+<h1 align="center">Dobro Score</h1>
 
-- Para começar um jogo deverá ter no mínimo 2 jogadores e no máximo 6;
-- Se o jogo tiver até 5 jogadores é distribuido 6 cartas para cada jogador
-- Se o jogo tiver 6 jogadores é distribuido 5 cartas para cada jogador
-- Em caso de jogo com 2 jogadores a cada escalada após o embaralhamento das cartas, é retirada 10 cartas que não serão usadas
-- Um jogo tem 3 rodadas e N escaladas;
+<img align="center" src="https://i.pinimg.com/736x/ff/40/bb/ff40bb2c3858bb1877a8d2b48ec43431.jpg" />
 
-- [] Cadastrar players;
-- [] Deverá ter uma tabela de pontos/rodadas para saber como cada jodador está no jogo;
-- [] Deverá ter uma tabela para registrar a quantidade de cartas de cada jodador na escalada atual
-- [] A cada escalada é necessário informar a quantidade de cartas de cada jodador e processar os pontos para atualizar a tabela de pontos/rodadas;
-- [] Deverá ser possível marcar o jogador com a carta de ESQUECIDO para que seja contabilizado menos 1 ponto
-- [] Não poderá ser alterado o jodador depois que começar o jogo;
-- [] A tabela de escalada no momento em que estiver sendo adicionado a quantidade de cartas, devera atualizar as posições dos jogadores
-- [] Deverá mostrar a quantidade de cartas que sera distribuida de acordo com a quantidade de players cadastrados
+<p align="center">Dobro Score simplifies the scoring process for the intricate Brazilian card game, Dobro. With its intuitive design to the game's rules, players can effortlessly track their points and enjoy the game.</p>
 
-Desejáveis
 
-- [] Mostrar quantas escaladas já ocorrerão
+## Installation
 
-___
+Follow these steps to install and run the application:
 
-## Vue 3 + TypeScript + Vite
+1. Install all dependencies to run the project:
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+```bash
+yarn
+```
 
-## Recommended IDE Setup
+2. Run the project:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+```bash
+yarn dev
+```
 
-## Type Support For `.vue` Imports in TS
+## Usage
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Once the application is running, access it through <http://localhost:5173> to begin scoring your Dobro games efficiently.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## License
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+This project is licensed under the [MIT License](/LICENSE), allowing for flexible use and modification while ensuring proper attribution.
 
+## Documentation
+
+For detailed rules of the game, refer to the official [Dobro Manual](/public/DOBRO_Manual_BR_3ra.pdf) 
+
+## Acknowledgments
+
+Special thanks to [Alan Schio](https://github.com/schirrel) for valuable Vue tips, which helped me out in the development of this project.
+
+## Contact
+
+For questions or feedback, feel free to contact me at <ldantas.ti@gmail.com>. I welcome any questions or suggestions you may have. Additionally, you can check out my website and LinkedIn profile for more information:
+
+- Webstite: <https://lucianodantas.dev>
+- Linkedin: <https://www.linkedin.com/in/ldantas-s/>
