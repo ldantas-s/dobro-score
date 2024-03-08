@@ -5,7 +5,7 @@ defineProps<{ heads: string[] }>();
   <table>
     <thead>
       <tr>
-        <th class="p-8 bg-green-500" v-for="head in heads" :key="head">
+        <th class="p-8 break-words bg-green-500" v-for="head in heads" :key="head">
           {{ head }}
         </th>
       </tr>

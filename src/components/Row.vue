@@ -9,10 +9,10 @@ const event = defineEmits(['defineForgotten']);
 </script>
 
 <template>
-  <td class="px-24" :data-test="`${props.player.name}-name`">
+  <td class="px-8 break-words" :data-test="`${props.player.name}-name`">
     {{ props.player.name }}
   </td>
-  <td class="p-16 lg:p-8">
+  <td class="py-16 px-8 lg:p-8">
     <input
       type="radio"
       name="forgotten"

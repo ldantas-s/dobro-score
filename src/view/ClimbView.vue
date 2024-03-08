@@ -31,8 +31,8 @@ const finish = () => {
       :heads="[
         'Nome',
         'Esquecido',
-        'Q. Cartas',
-        'Posição (Mais Cartas)',
+        'Cartas',
+        'Posição',
         'Pontos',
       ]"
       class="mb-8"
