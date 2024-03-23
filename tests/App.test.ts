@@ -146,6 +146,6 @@ test('should show the winner screen after the third round', async () => {
   expect(wrapper.find('.climbing-info').exists()).toBeFalsy();
   expect(wrapper.find('[data-test="round-info"]').exists()).toBeFalsy();
   expect(wrapper.find('.winner-congrats').text()).toBe(
-    'Parabéns! B é o vencedor(a) com 6 pontos'
+    'Parabéns B , você venceu com 6 pontos!'
   );
 });
